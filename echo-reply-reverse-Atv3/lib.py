@@ -20,9 +20,10 @@ def gerar_string(tamanho_bytes):
     return s
 
 def gera_logs(tamanho_mensagem):
-    print("Pressione 'l' para que o servidor comece a gerar logs")
+    print("Pressione 'f' para que o servidor comece a gerar logs")
     while True:
-        if(keyboard.is_pressed('l')):
+        if(keyboard.is_pressed('f')):
+            print("\nOs logs comecaram a ser gerados")
             path = os.path.dirname(os.path.realpath(__file__))
             file = open(f"{path}/logs/use_system_{tamanho_mensagem}.txt", "a")
             tempo = 0

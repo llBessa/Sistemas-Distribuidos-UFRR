@@ -1,13 +1,6 @@
 import socket
 import threading
-import keyboard
 from lib import *
-
-# fecha o programa
-def finaliza_clientes():
-    while True:
-        if(keyboard.is_pressed('q')):
-            finalizar_programa()
 
 def send_message(sock, message):
     try:
@@ -17,6 +10,7 @@ def send_message(sock, message):
         print(f"Resposta recebida: {response}")
     except:
         print("Erro de conexão com o servidor")
+        finalizar_programa()
     
 def start_client():
     client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -36,8 +30,4 @@ def init_clients(number_clients):
         thread_finalizacao.start()
 
 if __name__ == "__main__":
-    # espera a tecla q ser pressionada para finalizar o programa
-    thread_finalizacao = threading.Thread(target=finaliza_clientes)
-    thread_finalizacao.start()
-
     init_clients(1)
