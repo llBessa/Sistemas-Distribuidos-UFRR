@@ -1,15 +1,8 @@
 import socket
 import threading
-import keyboard
-from lib import finalizar_programa
+from lib import *
 
-# finaliza todas as conexões e depois fecha o servidor
-def finaliza_servidor():
-    while True:
-        if(keyboard.is_pressed('q')):
-            finalizar_programa()
-
-def echo_reply_reverse(client_socket, message):
+def echo_reply_reverse(client_socket, message: str):
     # Inverte a mensagem recebida
     message = message.decode()[::-1].encode()
 
@@ -19,7 +12,7 @@ def echo_reply_reverse(client_socket, message):
 def handle_client(client_socket):
     while True:
         # Recebe a mensagem do cliente
-        message = client_socket.recv(1024)
+        message = client_socket.recv(4096)
 
         # inicia uma nova thread para processar a requisicao
         nova_requisicao = threading.Thread(target=echo_reply_reverse, args=(client_socket, message))
@@ -51,9 +44,13 @@ def start_server():
         client_thread = threading.Thread(target=handle_client, args=(client_socket,))
         client_thread.start()
 
+
 if __name__ == '__main__':
-    # espera a tecla q ser pressionada para finalizar o programa
-    thread_finalizacao = threading.Thread(target=finaliza_servidor)
-    thread_finalizacao.start()
-    
+    # tamanho das mensagens recebidas em bytes
+    tamanho_mensagem = int(sys.argv[1])
+
+    # gera logs de uso em tempo real
+    thread_log_generator = threading.Thread(target=gera_logs, args=(tamanho_mensagem,))
+    thread_log_generator.start()
+
     start_server()

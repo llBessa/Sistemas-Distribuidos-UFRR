@@ -1,8 +1,7 @@
 import socket
 import threading
-import time
 import keyboard
-from lib import finalizar_programa
+from lib import *
 
 # fecha o programa
 def finaliza_clientes():
@@ -14,7 +13,7 @@ def send_message(sock, message):
     try:
         sock.sendall(message.encode())
 
-        response = sock.recv(1024).decode()
+        response = sock.recv(4096).decode()
         print(f"Resposta recebida: {response}")
     except:
         print("Erro de conexão com o servidor")
@@ -26,14 +25,19 @@ def start_client():
 
     print('Conectado ao servidor...')
     while True:
-        message = "Eai vagabunda"
+        # gera uma mensagem com o tamanho em bytes especificado
+        message = gerar_string(int(sys.argv[1]))
         print(f"Frase enviada: {message}")
-        time.sleep(2)
         send_message(client_socket, message)
+
+def init_clients(number_clients):
+    for i in range(number_clients):
+        thread_finalizacao = threading.Thread(target=start_client)
+        thread_finalizacao.start()
 
 if __name__ == "__main__":
     # espera a tecla q ser pressionada para finalizar o programa
     thread_finalizacao = threading.Thread(target=finaliza_clientes)
     thread_finalizacao.start()
 
-    start_client()
+    init_clients(1)
