@@ -25,7 +25,7 @@ def gera_logs(tamanho_mensagem):
         if(keyboard.is_pressed('f')):
             print("\nOs logs comecaram a ser gerados")
             path = os.path.dirname(os.path.realpath(__file__))
-            file = open(f"{path}/logs/use_system_{tamanho_mensagem}.txt", "a")
+            file = open(f"{path}/logs/use_system_{tamanho_mensagem}.txt", "w")
             tempo = 0
 
             # gera logs em um arquivo por um minuto e finaliza o programa após isso
@@ -35,7 +35,7 @@ def gera_logs(tamanho_mensagem):
                 uso_rede = psutil.net_io_counters().packets_recv
                 file.write(f"{uso_memoria},{uso_cpu},{uso_rede}\n")
                 tempo+=1
-                time.sleep(1)
+                time.sleep(0.2)
             file.close()
             
             print("Os logs foram gerados com sucesso!")

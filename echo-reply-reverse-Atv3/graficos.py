@@ -1,21 +1,24 @@
 import matplotlib.pyplot as plt
 
-tamanhos_testados = [50, 100, 200, 300, 400, 500]
+quantidade_bytes = 100
 
-medias = []
+arquivo = open(f"./logs/use_system_{quantidade_bytes}.txt", "r")
+dados = arquivo.readlines()
 
-for i in tamanhos_testados:
-    arquivo = open(f"./logs/use_system_{i}.txt", "r")
-    dados = arquivo.readlines()
+tempo = [i for i in range(60)]
 
-    uso = 0
-    for dado in dados:
-        uso += float(dado.split(",")[2])
-    medias.append(uso/60)
+uso_memoria = []
+uso_cpu = []
+uso_rede = []
 
-plt.plot(tamanhos_testados, medias)
-# plt.ylim(tamanhos_testados[0], tamanhos_testados[5])
-plt.title("Uso da rede por tamanho das mensagens em bytes")
-plt.xlabel("tamanho das mensagens em bytes")
-plt.ylabel("quantidade media de pacotes recebidos")
-plt.savefig("./graficos/uso_medio_rede.png")
+for dado in dados:
+    uso_memoria.append(dado.split(",")[0])
+    uso_cpu.append(dado.split(",")[1])
+    uso_rede.append(dado.split(",")[2])
+
+plt.plot(tempo, uso_memoria)
+plt.title("Uso da rede ao longo do tempo")
+plt.yticks(range(0, 60, 10))
+plt.xlabel("tempo")
+plt.ylabel("quantidade de pacotes recebidos")
+plt.savefig(f"./graficos/uso_medio_memoria_{quantidade_bytes}b.png")

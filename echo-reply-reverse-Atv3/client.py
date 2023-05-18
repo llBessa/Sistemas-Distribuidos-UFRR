@@ -22,7 +22,8 @@ def start_client():
         # gera uma mensagem com o tamanho em bytes especificado
         message = gerar_string(int(sys.argv[1]))
         print(f"Frase enviada: {message}")
-        send_message(client_socket, message)
+        thread_send_msg = threading.Thread(target=send_message, args=(client_socket, message,))
+        thread_send_msg.start()
 
 def init_clients(number_clients):
     for i in range(number_clients):
