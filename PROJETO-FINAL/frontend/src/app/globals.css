@@ -1,0 +1,57 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+main.main {
+    min-height: 100vh;
+}
+
+div.form-container {
+    display: flex;
+    height: 80%;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+}
+
+form.cadastro {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    background-color: #d6d4d4;
+    padding: 1.5rem;
+    width: 40%;
+}
+
+form.cadastro input {
+    width: 100%;
+    padding: 0.25rem;
+    border-radius: 2px;
+}
+
+form.cadastro input.botao-submit {
+    margin: 0 auto;
+    width: fit-content;
+    color: white;
+    padding: 0.5rem 1.25rem;
+    background-color: #37889A;;
+}
+
+.livros-container {
+    margin-top: 2rem;
+    padding: 0 2rem;
+    min-height: 80vh;
+}
+
+.compra-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 80vh;
+}
+
+.compra {
+    background-color: rgb(247, 243, 243);
+    width: 50%;
+    padding: 0 2rem;
+}

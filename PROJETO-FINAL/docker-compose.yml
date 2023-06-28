@@ -1,0 +1,57 @@
+version: '3.7'
+
+volumes:
+  banco_api:
+
+networks:
+  books_net:
+    ipam:
+      driver: default
+      config:
+        - subnet: "172.21.0.0/24"
+
+services:
+  frontend:
+    image: frontendbooks
+    build: ./frontend
+    restart: always
+    tty: true
+    networks:
+      books_net:
+        ipv4_address: 172.21.0.2
+    ports:
+      - 3000:3000
+    command: sh -c "npm i ; npm run dev"
+    depends_on:
+      - backend
+    volumes:
+      - C:\Users\lucas\OneDrive\Documentos\UFRR\COMPUTACAO\PROJETOS\YOURBOOK\frontend:/app
+  backend:
+    image: backendbooks
+    build: ./backend
+    restart: always
+    networks:
+      books_net:
+        ipv4_address: 172.21.0.3
+    tty: true
+    ports:
+      - 3001:3001
+    command: sh -c "npm i ; npm run dev"
+    depends_on:
+      - banco
+    volumes:
+      - C:\Users\lucas\OneDrive\Documentos\UFRR\COMPUTACAO\PROJETOS\YOURBOOK\backend:/app
+  banco:
+    image: postgres:15
+    restart: always
+    environment:
+      POSTGRES_DB: books
+      POSTGRES_USER: booksadm
+      POSTGRES_PASSWORD: c63f0cb77db608bd621668b7c103f788
+    networks:
+      books_net:
+        ipv4_address: 172.21.0.4
+    ports:
+      - 5432:5432
+    volumes:
+      - banco_api:/var/lib/postgresql/data

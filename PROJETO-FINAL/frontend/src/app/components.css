@@ -1,0 +1,30 @@
+header {
+    background-color: #37889A;
+    width: 100%;
+}
+
+.header {
+    display: inline-flex;
+    gap: 1.25rem;
+    align-items: center;
+    padding: 0.5rem;
+    color: white;
+    font-size: large;
+}
+
+footer.footer {
+    width: 100%;
+    text-align: center;
+    background-color: #37889A;
+    color: white;
+    padding: 1rem;
+}
+
+.livro {
+    display: inline-flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    background-color: rgb(247, 243, 243);
+    border-radius: 5px;
+    width: 250px;
+}
