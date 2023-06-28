@@ -44,3 +44,10 @@ Consiste em um sistema de aquisição de livros online, onde as pessoas podem en
 > **Google Books:** Utilizado para obter a coleção de arquivos disponíveis no sistema.<br>
 >
 > **Obs: Além dos livros que vem da Api do Google Books, o sistema permite o cadastro diretamente pelo site.**
+
+## Como rodar o projeto?
+---
+
+> Primeiramente, no arquivo docker-compose.yml que está na raiz do projeto, deve-se alterar "**Caminho do arquivo**" pelo caminho absoluto do projeto no sistema.
+>
+> Logo após, execute o comando "**docker compose up**" no terminal e espere os seviços iniciarem.
