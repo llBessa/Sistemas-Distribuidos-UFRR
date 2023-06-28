@@ -25,7 +25,7 @@ services:
     depends_on:
       - backend
     volumes:
-      - C:\Users\lucas\OneDrive\Documentos\UFRR\COMPUTACAO\PROJETOS\YOURBOOK\frontend:/app
+      - "Caminho do projeto"\frontend:/app
   backend:
     image: backendbooks
     build: ./backend
@@ -40,7 +40,7 @@ services:
     depends_on:
       - banco
     volumes:
-      - C:\Users\lucas\OneDrive\Documentos\UFRR\COMPUTACAO\PROJETOS\YOURBOOK\backend:/app
+      - "Caminho do projeto"\backend:/app
   banco:
     image: postgres:15
     restart: always
